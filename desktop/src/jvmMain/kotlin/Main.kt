@@ -4,7 +4,7 @@ import xyz.xfqlittlefan.byucp.common.App
 
 
 fun main() = application {
-    Window(onCloseRequest = ::exitApplication) {
+    Window(onCloseRequest = ::exitApplication, title = "BoomYouUpCompose") {
         App()
     }
 }

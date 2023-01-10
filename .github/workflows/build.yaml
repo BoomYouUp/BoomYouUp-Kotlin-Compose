@@ -7,4 +7,48 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - type: Android
+            os: ubuntu-latest
+            task: assembleDebug
+            output: android/build/outputs/apk/debug/*
+          - type: Desktop Linux
+            os: ubuntu-latest
+            task: packageDistributionForCurrentOS
+            output: desktop/build/compose/binaries/main/*/*
+          - type: Desktop Windows
+            os: windows-latest
+            task: packageDistributionForCurrentOS
+            output: desktop/build/compose/binaries/main/*/*
+          - type: Desktop macOS
+            os: macos-latest
+            task: packageDistributionForCurrentOS
+            output: desktop/build/compose/binaries/main/*/*
+          - tyoe: Web
+            os: ubuntu-latest
+            task: jsBrowserDistribution
+            output: web/build/distributions/**/*
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v2
+        with:
+          java-version: 17
+      - uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - if: matrix.type == 'Android'
+        uses: android-actions/setup-android@v2
+      - name: Build
+        run: ./gradlew ${{ matrix.task }}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.type }}
+          path: ${{ matrix.output }}

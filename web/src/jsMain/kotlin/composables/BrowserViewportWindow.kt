@@ -15,11 +15,13 @@ import org.w3c.dom.HTMLCanvasElement
 import org.w3c.dom.HTMLStyleElement
 import org.w3c.dom.HTMLTitleElement
 
+private const val CANVAS_ELEMENT_ID = "ComposeTarget"
+
 /**
  * A Skiko/Canvas-based top-level window using the browser's entire viewport. Supports resizing.
  */
 fun renderComposableIntoBrowserViewport(
-    title: String = "Untitled", rootId: String = "root", content: @Composable ComposeWindow.() -> Unit
+    title: String = "Untitled", content: @Composable ComposeWindow.() -> Unit
 ) {
     val htmlHeadElement = document.head!!
     htmlHeadElement.appendChild((document.createElement("style") as HTMLStyleElement).apply {
@@ -33,7 +35,7 @@ fun renderComposableIntoBrowserViewport(
                         padding: 0 !important;
                     }
 
-                    #$rootId {
+                    #$CANVAS_ELEMENT_ID {
                         outline: none;
                     }
                     """.trimIndent()
@@ -46,7 +48,7 @@ fun renderComposableIntoBrowserViewport(
         setAttribute("height", "${window.innerHeight}")
     }
 
-    val canvas = (document.getElementById(rootId) as HTMLCanvasElement).apply {
+    val canvas = (document.getElementById(CANVAS_ELEMENT_ID) as HTMLCanvasElement).apply {
         fillViewportSize()
     }
 

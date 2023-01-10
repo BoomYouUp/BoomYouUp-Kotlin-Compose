@@ -1,7 +1,7 @@
 package xyz.xfqlittlefan.byucp.common
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -12,7 +12,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 @Composable
 fun App() {
     val topAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    var count by remember { mutableStateOf(0) }
+    var count by remember { mutableStateOf(1) }
 
     AppTheme {
         Scaffold(modifier = Modifier.nestedScroll(topAppBarScrollBehavior.nestedScrollConnection), topBar = {
@@ -22,13 +22,14 @@ fun App() {
                 }, scrollBehavior = topAppBarScrollBehavior
             )
         }) { padding ->
-            LazyColumn(Modifier.padding(padding)) {
-                item {
-                    Item({ count++ }, { count-- })
-                }
-
+            LazyColumn(Modifier.fillMaxSize(), contentPadding = padding) {
                 items(count) {
-                    Item({ count++ }, { count-- })
+                    Item({ count++ }, {
+                        count--
+                        if (count < 1) {
+                            count = 1
+                        }
+                    })
                 }
             }
         }
