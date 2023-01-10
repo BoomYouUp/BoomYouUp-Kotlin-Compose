@@ -27,7 +27,7 @@ jobs:
             os: macos-latest
             task: packageDistributionForCurrentOS
             output: desktop/build/compose/binaries/main/*/*
-          - tyoe: Web
+          - type: Web
             os: ubuntu-latest
             task: jsBrowserDistribution
             output: web/build/distributions/**/*
