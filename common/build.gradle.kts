@@ -85,12 +85,9 @@ kotlin {
 }
 
 android {
+    namespace = "${ProjectConfig.group}.common"
     compileSdk = AndroidConfig.compileSdk
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-
-    buildFeatures {
-        buildConfig = false
-    }
 
     defaultConfig {
         minSdk = AndroidConfig.minSdk
