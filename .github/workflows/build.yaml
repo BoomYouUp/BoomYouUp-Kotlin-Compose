@@ -122,13 +122,14 @@ jobs:
       - if: matrix.type == 'Android'
         uses: android-actions/setup-android@v2
       - name: Write signing config
+        shell: bash
         run: |
           echo ${{ secrets.KEY }} | base64 --decode > android/key.jks
           echo ${{ secrets.PROPERTIES }} | base64 --decode > android/key.properties
       - name: Build
-        run: ./gradlew ${{ matrix.task }}
+        run: ./gradlew ${{ matrix.task }} --debug
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.type }}
+          name: ${{ matrix.type }} ${{ matrix.build-type }}
           path: ${{ matrix.output }}
