@@ -27,79 +27,79 @@ jobs:
             os: ubuntu-latest
             build-type: Debug
             task: packageDistributionForCurrentOS
-            output: desktop/build/compose/binaries/main/*/*
+            output: desktop/build/compose/binaries/main*/*/*
 
           - type: Desktop Linux Package
             os: ubuntu-latest
             build-type: Release
             task: packageReleaseDistributionForCurrentOS
-            output: desktop/build/compose/binaries/main/*/*
+            output: desktop/build/compose/binaries/main*/*/*
 
           - type: Desktop Linux Distribution
             os: ubuntu-latest
             build-type: Debug
             task: createDistributable
-            output: desktop/build/compose/binaries/main/app/**/*
+            output: desktop/build/compose/binaries/main*/app/BoomYouUpCompose/**/*
 
           - type: Desktop Linux Distribution
             os: ubuntu-latest
             build-type: Release
             task: createReleaseDistributable
-            output: desktop/build/compose/binaries/main/app/**/*
+            output: desktop/build/compose/binaries/main*/app/BoomYouUpCompose/**/*
 
           - type: Desktop Windows Package
             os: windows-latest
             build-type: Debug
             task: packageDistributionForCurrentOS
-            output: desktop/build/compose/binaries/main/*/*
+            output: desktop/build/compose/binaries/main*/*/*
 
           - type: Desktop Windows Package
             os: windows-latest
             build-type: Release
             task: packageReleaseDistributionForCurrentOS
-            output: desktop/build/compose/binaries/main/*/*
+            output: desktop/build/compose/binaries/main*/*/*
 
           - type: Desktop Windows Distribution
             os: windows-latest
             build-type: Debug
             task: createDistributable
-            output: desktop/build/compose/binaries/main/app/**/*
+            output: desktop/build/compose/binaries/main*/app/BoomYouUpCompose/**/*
 
           - type: Desktop Windows Distribution
             os: windows-latest
             build-type: Release
             task: createReleaseDistributable
-            output: desktop/build/compose/binaries/main/app/**/*
+            output: desktop/build/compose/binaries/main*/app/BoomYouUpCompose/**/*
 
           - type: Desktop macOS Package
             os: macos-latest
             build-type: Debug
             task: packageDistributionForCurrentOS
-            output: desktop/build/compose/binaries/main/*/*
+            output: desktop/build/compose/binaries/main*/*/*
 
           - type: Desktop macOS Package
             os: macos-latest
             build-type: Release
             task: packageReleaseDistributionForCurrentOS
-            output: desktop/build/compose/binaries/main/*/*
+            output: desktop/build/compose/binaries/main*/*/*
 
           - type: Desktop macOS Distribution
             os: macos-latest
             build-type: Debug
             task: createDistributable
-            output: desktop/build/compose/binaries/main/app/**/*
+            output: desktop/build/compose/binaries/main*/app/BoomYouUpCompose/**/*
 
           - type: Desktop macOS Distribution
             os: macos-latest
             build-type: Release
             task: createReleaseDistributable
-            output: desktop/build/compose/binaries/main/app/**/*
+            output: desktop/build/compose/binaries/main*/app/BoomYouUpCompose/**/*
 
           - type: Web
             os: ubuntu-latest
             build-type: Debug
             task: jsBrowserDevelopmentWebpack
-            output: web/build/distributions/**/*
+            output: web/build/developmentExecutable/**/*
 
           - type: Web
             os: ubuntu-latest
