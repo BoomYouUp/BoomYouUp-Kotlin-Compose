@@ -127,7 +127,10 @@ jobs:
           echo ${{ secrets.KEY }} | base64 --decode > android/key.jks
           echo ${{ secrets.PROPERTIES }} | base64 --decode > android/key.properties
       - name: Build
-        run: ./gradlew ${{ matrix.task }} --debug
+        run: ./gradlew ${{ matrix.task }}
+      - name: Tree
+        shell: bash
+        run: tree
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
