@@ -121,8 +121,7 @@ jobs:
             ${{ runner.os }}-gradle-
       - if: matrix.type == 'Android'
         uses: android-actions/setup-android@v2
-      - if: matrix.type == 'Android'
-        name: Write signing config
+      - name: Write signing config
         run: |
           echo ${{ secrets.KEY }} | base64 --decode > android/key.jks
           echo ${{ secrets.PROPERTIES }} | base64 --decode > android/key.properties

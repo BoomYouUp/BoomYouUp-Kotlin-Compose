@@ -87,6 +87,11 @@ kotlin {
 android {
     compileSdk = AndroidConfig.compileSdk
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+
+    buildFeatures {
+        buildConfig = false
+    }
+
     defaultConfig {
         minSdk = AndroidConfig.minSdk
         targetSdk = AndroidConfig.targetSdk
