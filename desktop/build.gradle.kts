@@ -1,3 +1,5 @@
+import byucp.CompileConfig
+import byucp.ProjectConfig
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
@@ -8,11 +10,13 @@ plugins {
 group = rootProject.group
 version = rootProject.version
 
-val jvmCompilation: org.jetbrains.kotlin.gradle.plugin.mpp.KotlinJvmCompilation.() -> Unit by rootProject.extra
-
 kotlin {
     jvm {
-        compilations.all(jvmCompilation)
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = CompileConfig.jvmTarget
+            }
+        }
         withJava()
     }
     sourceSets {
@@ -31,7 +35,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = rootProject.name
-            packageVersion = rootProject.version.toString()
+            packageVersion = ProjectConfig.version
         }
     }
 }

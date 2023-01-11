@@ -1,32 +1,9 @@
+import byucp.ProjectConfig
 import com.android.build.api.dsl.CompileOptions
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinJvmCompilation
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 
-/**
- * ```
- * val jvmCompilation: org.jetbrains.kotlin.gradle.plugin.mpp.KotlinJvmCompilation.() -> Unit by rootProject.extra
- * ```
- */
-val jvmCompilation by extra(fun KotlinJvmCompilation.() {
-    kotlinOptions.jvmTarget = "11"
-})
-
-val androidCompileSdk by extra(33)
-val androidMinSdk by extra(24)
-val androidTargetSdk by extra(33)
-
-/**
- * ```kotlin
- * val androidCompileOptions: com.android.build.api.dsl.CompileOptions.() -> Unit by rootProject.extra
- * ```
- */
-val androidCompileOptions by extra(fun CompileOptions.() {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-})
-
-group = "xyz.xfqlittlefan.byucp"
-version = "1.0.0"
-val versionCode by extra(1)
+group = ProjectConfig.group
+version = ProjectConfig.version
 
 allprojects {
     repositories {

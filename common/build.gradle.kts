@@ -1,3 +1,7 @@
+import byucp.AndroidConfig
+import byucp.CompileConfig
+import byucp.ProjectConfig
+
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
@@ -5,14 +9,22 @@ plugins {
 }
 
 group = rootProject.group
-version = rootProject.version
-
-val jvmCompilation: org.jetbrains.kotlin.gradle.plugin.mpp.KotlinJvmCompilation.() -> Unit by rootProject.extra
+version = rootProject.group
 
 kotlin {
-    android()
+    android {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = CompileConfig.jvmTarget
+            }
+        }
+    }
     jvm("desktop") {
-        compilations.all(jvmCompilation)
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = CompileConfig.jvmTarget
+            }
+        }
     }
     js(IR) {
         browser()
@@ -72,17 +84,16 @@ kotlin {
     }
 }
 
-val androidCompileSdk: Int by rootProject.extra
-val androidMinSdk: Int by rootProject.extra
-val androidTargetSdk: Int by rootProject.extra
-val androidCompileOptions: com.android.build.api.dsl.CompileOptions.() -> Unit by rootProject.extra
-
 android {
-    compileSdk = androidCompileSdk
+    compileSdk = AndroidConfig.compileSdk
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = androidMinSdk
-        targetSdk = androidTargetSdk
+        minSdk = AndroidConfig.minSdk
+        targetSdk = AndroidConfig.targetSdk
     }
-    compileOptions(androidCompileOptions)
+
+    compileOptions {
+        sourceCompatibility = CompileConfig.compatibility
+        targetCompatibility = CompileConfig.compatibility
+    }
 }

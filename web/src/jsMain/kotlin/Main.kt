@@ -4,7 +4,7 @@ import xyz.xfqlittlefan.byucp.common.App
 
 fun main() {
     onWasmReady {
-        renderComposableIntoBrowserViewport("BoomYouUpX") {
+        renderComposableIntoBrowserViewport("BoomYouUpCompose") {
             App()
         }
     }
