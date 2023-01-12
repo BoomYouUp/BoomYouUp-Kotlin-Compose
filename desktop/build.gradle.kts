@@ -34,6 +34,7 @@ compose.desktop {
         mainClass = "MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = rootProject.name
             description = ProjectConfig.description
             vendor = ProjectConfig.vendor
             licenseFile.set(rootProject.file("LICENSE"))
